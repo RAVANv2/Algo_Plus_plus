@@ -4,22 +4,24 @@ def add_edge(graph, u,v):
     graph[u].append(v)
     graph[v].append(u)
 
-
 def dfs(graph, visited, src):
     visited[src] = True
     print(src, end=' ')
+
     for nbr in graph[src]:
         if not visited[nbr]:
             dfs(graph, visited, nbr)
+
+
 
 def find_components(graph):
     visited = [False for _ in range(len(graph))]
     cnt = 1
     for node in graph:
         if not visited[node]:
-            print(f"Component {cnt} --> ", end=' ')
+            print(f"{cnt} --> ", end=' ')
             dfs(graph, visited, node)
-            cnt+=1
+            cnt += 1
             print()
 
 graph = defaultdict(list)
