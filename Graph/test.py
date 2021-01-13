@@ -1,36 +1,50 @@
-
-
 from collections import defaultdict
 
 
-graph = defaultdict(list)
-
-def add_edge(graph, u,v):
-    graph[u].append(v)
-    graph[v].append(u)
-
+class Graph:
+    def __init__(self):
+        self.graph = defaultdict(list)
+        self.node = set()
 
 
-def bfs(graph, src):
+    def addEdge(self,u,v):
+        self.graph[u].append(v)
+        # self.graph[v].append(u)
 
-    queue = []
-    queue.append(src)
-    vis = [False for _ in range(len(graph))]
-    vis[src] = True
+        self.node.add(u)
+        self.node.add(v)
 
-    while queue:
-        node = queue.pop(0)
-        print(node, end=' ')
-        for nbr in graph[node]:
-            if not vis[nbr]:
-                vis[nbr] = True
-                queue.append(nbr)
+    def is_cycle(self,stack,visited,src):
+        visited[src] = stack[src] = True
+        for node in self.graph[src]:
+            if stack[node] == True:
+                return True
+            elif visited[node] == False:
+                cycle = self.is_cycle(stack,visited,node)
+                if cycle:
+                    return True
+
+        stack[src] = False
+        return False
+
+    def cycle(self,src):
+        stack = {}
+        visited = {}
+
+        for ele in self.node:
+            stack[ele] = visited[ele] = False
+
+        ans = self.is_cycle(stack, visited, src)
+        print(stack)
+        return ans
 
 
 
-add_edge(graph,0,1)
-add_edge(graph,0,2)
-add_edge(graph,1,2)
-add_edge(graph,2,3)
+g = Graph()
 
-bfs(graph,3)
+g.addEdge(1,2)
+g.addEdge(2,3)
+g.addEdge(3,4)
+g.addEdge(4,1)
+
+print(g.cycle(1))
