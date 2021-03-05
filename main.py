@@ -1,4 +1,1 @@
-
-from python.test import running
-
-print(running())
+print(5//2)
