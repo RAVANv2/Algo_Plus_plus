@@ -1,16 +1,12 @@
 
+arr = [1, 101, 2, 3, 100, 4, 5]
+dp = [0]*len(arr)
+for i in range(len(arr)):
+    dp[i] = arr[i]
 
-
-arr = [1,0,2,3,0,4,5,0]
-
-i = 0
-n = len(arr)
-while i < n:
-    if arr[i] == 0:
-        arr.insert(i,0)
-        i += 2
-    else:
-        i += 1
-
-del arr[n:]
-print(arr)
+for i in range(len(arr)):
+    for j in range(i):
+        if arr[j] < arr[i] and dp[i] < dp[j] + arr[i]:
+            dp[i] = dp[j] + arr[i]
+print(dp)
+print(max(dp))

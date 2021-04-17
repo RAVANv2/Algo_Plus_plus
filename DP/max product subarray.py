@@ -11,7 +11,7 @@ min_n = nums[0]
 ans = nums[0]
 
 for i in nums[1:]:
-    max_n = max(i,max_prev*i,min_prev*i)
+    max_n = max(i, max_prev*i, min_prev*i)
     min_n = min(i,max_prev*i,min_prev*i)
 
     max_prev = max_n
