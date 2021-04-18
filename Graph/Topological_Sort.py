@@ -10,7 +10,6 @@ class Graph:
 
     def dfs(self, src, visited, stack):
         visited[src] = True
-
         for nbr in self.graph[src]:
             if not visited[nbr]:
                 self.dfs(nbr, visited, stack)
@@ -19,11 +18,9 @@ class Graph:
     def topologicalSort(self):
         visited = [False for i in range(self.V)]
         stack = []
-
         for idx in range(self.V):
             if not visited[idx]:
                 self.dfs(idx, visited, stack)
-
         print(stack[::-1])
 
 
